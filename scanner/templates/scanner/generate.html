@@ -1,0 +1,39 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Generate QR Code{% endblock title %}
+
+{% block maincontent %}
+<div style="max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+  <h2 style="text-align: center; margin-bottom: 25px;">Generate QR Code</h2>
+
+  <form method="post">
+    {% csrf_token %}
+
+    <div style="margin-bottom: 18px;">
+      <label for="mobile" style="display:block; font-weight:600; margin-bottom:6px;">Mobile Number</label>
+      <input type="text" id="mobile" name="mobile" required
+             placeholder="Enter mobile number"
+             style="width:100%; padding:10px; border:1px solid #ccc; border-radius:6px;">
+    </div>
+
+    <div style="margin-bottom: 25px;">
+      <label for="data" style="display:block; font-weight:600; margin-bottom:6px;">QR Data</label>
+      <input type="text" id="data" name="data" required
+             placeholder="Enter text or link for QR code"
+             style="width:100%; padding:10px; border:1px solid #ccc; border-radius:6px;">
+    </div>
+
+    <button type="submit"
+            style="width:100%; background-color:#333; color:white; padding:12px; border:none; border-radius:6px; font-weight:600; cursor:pointer;">
+      Generate
+    </button>
+  </form>
+
+  {% if qr_image %}
+    <div style="text-align:center; margin-top:30px;">
+      <h3>Your Generated QR Code:</h3>
+      <img src="data:image/png;base64,{{ qr_image }}" alt="Generated QR Code" style="margin-top:15px;">
+    </div>
+  {% endif %}
+</div>
+{% endblock maincontent %}

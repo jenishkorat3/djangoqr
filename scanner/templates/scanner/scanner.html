@@ -1,0 +1,40 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Scan QR Code{% endblock title %}
+
+{% block maincontent %}
+<div style="max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+  <h2 style="text-align: center; margin-bottom: 25px;">Scan QR Code</h2>
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div style="margin-bottom: 18px;">
+      <label for="mobile" style="display:block; font-weight:600; margin-bottom:6px;">Mobile Number</label>
+      <input type="text" id="mobile" name="mobile" required
+             placeholder="Enter mobile number"
+             style="width:100%; padding:10px; border:1px solid #ccc; border-radius:6px;">
+    </div>
+
+    <div style="margin-bottom: 25px;">
+      <label for="qr_image" style="display:block; font-weight:600; margin-bottom:6px;">Upload QR Image</label>
+      <input type="file" id="qr_image" name="qr_image" accept="image/*" required
+             style="width:100%; padding:10px; border:1px solid #ccc; border-radius:6px;">
+    </div>
+
+    <button type="submit"
+            style="width:100%; background-color:#333; color:white; padding:12px; border:none; border-radius:6px; font-weight:600; cursor:pointer;">
+      Scan
+    </button>
+  </form>
+
+  {% if decoded_data %}
+    <div style="text-align:center; margin-top:30px;">
+      <h3>Decoded QR Data:</h3>
+      <p style="margin-top:10px; font-size:16px; background:#f0f0f0; padding:10px; border-radius:8px;">
+        {{ decoded_data }}
+      </p>
+    </div>
+  {% endif %}
+</div>
+{% endblock maincontent %}
