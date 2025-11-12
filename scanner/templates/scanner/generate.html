@@ -6,7 +6,7 @@
 <div style="max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
   <h2 style="text-align: center; margin-bottom: 25px;">Generate QR Code</h2>
 
-  <form method="post">
+  <form method="post" action="{% url "generate_qr" %}">
     {% csrf_token %}
 
     <div style="margin-bottom: 18px;">
@@ -29,11 +29,19 @@
     </button>
   </form>
 
-  {% if qr_image %}
+  {% if qr_image_url %}
     <div style="text-align:center; margin-top:30px;">
       <h3>Your Generated QR Code:</h3>
-      <img src="data:image/png;base64,{{ qr_image }}" alt="Generated QR Code" style="margin-top:15px;">
+      <img src="{{ qr_image_url }}" alt="Generated QR Code" style="margin-top:15px; max-width: 250px; display:block; margin-left:auto; margin-right:auto;">
+
+      <div style="margin-top:15px;">
+        <a href="{{ qr_image_url }}" download="qr_code.png"
+          style="background-color:#00bcd4; color:white; padding:10px 18px; border-radius:6px; text-decoration:none; font-weight:600;">
+          ⬇️ Download QR Code
+        </a>
+      </div>
     </div>
   {% endif %}
+
 </div>
 {% endblock maincontent %}

@@ -6,7 +6,7 @@
 <div style="max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
   <h2 style="text-align: center; margin-bottom: 25px;">Scan QR Code</h2>
 
-  <form method="post" enctype="multipart/form-data">
+  <form method="post" action="{% url 'scan_qr' %}" enctype="multipart/form-data">
     {% csrf_token %}
 
     <div style="margin-bottom: 18px;">
